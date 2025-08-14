@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gagana K | Portfolio</title>
+  <meta name="description" content="Portfolio of Gagana K — Data Analytics, AI/ML, and Web Development projects, skills, and experience."/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- Reset & Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    :root{
+      --bg:#0b0f17;
+      --panel:#0f1624;
+      --text:#eaf2ff;
+      --muted:#9bb0d3;
+      --accent:#6ac6ff;
+      --accent-2:#a889ff;
+      --card:#111a2b;
+      --glass: rgba(255,255,255,0.06);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+    html, body { height: 100%; scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol";
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a{ color: var(--accent); text-decoration: none; }
+    h1,h2,h3{ margin: 0 0 .6rem 0; line-height: 1.2; }
+    section{ padding: 90px 20px; position: relative; }
+    .container{ width: min(1100px, 92%); margin: 0 auto; }
+
+    /* ---------- Animated gradient background ---------- */
+    .gradient-bg{
+      position: fixed; inset: 0; z-index: -2;
+      background: radial-gradient(1200px 800px at 10% 10%, rgba(106,198,255,.25), transparent 60%),
+                  radial-gradient(1000px 700px at 90% 30%, rgba(168,137,255,.20), transparent 60%),
+                  linear-gradient(180deg, #0b0f17 0%, #0b0f17 100%);
+      filter: saturate(120%);
+    }
+    .gradient-bg::after{
+      content:""; position:absolute; inset:-50%;
+      background: conic-gradient(from 0deg, rgba(106,198,255,.12), rgba(168,137,255,.12), rgba(106,198,255,.12));
+      animation: spin 40s linear infinite;
+      mix-blend-mode: overlay; pointer-events: none;
+    }
+    @keyframes spin{ to{ transform: rotate(1turn);} }
+
+    /* ---------- Particles canvas ---------- */
+    #particles{ position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .25; }
+
+    /* ---------- Navbar ---------- */
+    .nav{
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px); background: rgba(5,8,14,.55);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav .wrap{ display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; width: min(1100px, 92%); margin: 0 auto; }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.5px; }
+    .brand .dot{ width:10px; height:10px; border-radius:50%; background: linear-gradient(45deg,var(--accent),var(--accent-2)); box-shadow: 0 0 14px var(--accent); }
+    .nav a{ color: var(--text); opacity: .9; }
+    .links{ display:flex; gap:18px; flex-wrap: wrap; }
+    .cta{
+      padding: 10px 14px; border-radius: 12px;
+      background: linear-gradient(120deg,var(--accent),var(--accent-2));
+      color: #0b0f17; font-weight: 700; box-shadow: var(--shadow);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      padding-top: 80px; padding-bottom: 40px;
+      display:grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center;
+    }
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow);
+    }
+    .tag{ display:inline-block; padding:6px 12px; border:1px solid rgba(255,255,255,.18); border-radius: 999px; color: var(--muted); margin-bottom: 12px; background: rgba(255,255,255,.03); }
+    .title{ font-size: clamp(28px,5vw,44px); font-weight:800; }
+    .subtitle{ font-size: clamp(16px,2.2vw,18px); color: var(--muted); margin-top: 8px; }
+    .quick{ display:flex; gap:14px; margin-top: 18px; flex-wrap: wrap; }
+    .quick a{
+      padding: 10px 14px; border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04); border-radius: 12px; color: var(--text);
+    }
+    .hero-cta{ margin-top: 18px; display:flex; gap:12px; flex-wrap: wrap; }
+    .avatar{
+      height: 320px; border-radius: var(--radius);
+      background: radial-gradient(120px 160px at 70% 30%, rgba(106,198,255,.25), transparent 60%), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
+      border: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow);
+    }
+
+    /* ---------- Sections ---------- */
+    .section-title{ font-size: 28px; margin-bottom: 12px; }
+    .section-sub{ color: var(--muted); margin-bottom: 24px; }
+    .grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .card{
+      background: var(--glass); border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.45); }
+
+    /* ---------- Skills ---------- */
+    .chips{ display:flex; flex-wrap: wrap; gap: 10px; }
+    .chip{ padding:8px 12px; background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius: 999px; color: var(--text); }
+    .meter{ height: 10px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
+    .meter > span{ display:block; height: 100%; background: linear-gradient(90deg,var(--accent),var(--accent-2)); width: 0; }
+
+    /* ---------- Timeline ---------- */
+    .timeline{ position:relative; margin-top: 6px; }
+    .timeline::before{ content:""; position:absolute; left: 10px; top: 6px; bottom: 6px; width: 2px; background: rgba(255,255,255,.12); }
+    .t-item{ display:grid; grid-template-columns: 28px 1fr; gap: 14px; margin: 12px 0; }
+    .t-dot{ width: 22px; height: 22px; border-radius:50%; background: linear-gradient(120deg,var(--accent),var(--accent-2)); box-shadow: 0 0 0 4px rgba(255,255,255,.06); margin-top: 2px; }
+
+    /* ---------- Projects ---------- */
+    .project{ display:flex; flex-direction: column; gap: 10px; }
+    .project .links{ gap: 10px; }
+    .project a.btn{ padding:8px 12px; border-radius: 10px; border:1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04); }
+
+    /* ---------- Contact ---------- */
+    form{ display:grid; gap: 12px; }
+    input, textarea{
+      width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04); color: var(--text); outline: none;
+    }
+    textarea{ min-height: 120px; resize: vertical; }
+    button{ cursor: pointer; border: none; }
+    .btn-primary{ padding: 12px 16px; border-radius: 12px; background: linear-gradient(120deg,var(--accent),var(--accent-2)); color: #0b0f17; font-weight: 700; }
+
+    /* ---------- Footer ---------- */
+    footer{ padding: 28px 20px; color: var(--muted); border-top: 1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.2); }
+
+    /* ---------- Utilities ---------- */
+    .sr{ opacity: 0; transform: translateY(18px); transition: all .6s ease; }
+    .sr.show{ opacity: 1; transform: translateY(0); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="gradient-bg" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="wrap">
+      <div class="brand"><span class="dot"></span> <a href="#home">Gagana K</a></div>
+      <div class="links">
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#contact" class="cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero container">
+    <div class="hero-card sr">
+      <span class="tag">Data Analytics • AI/ML • Web</span>
+      <h1 class="title">Hi, I'm <span style="background: linear-gradient(120deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text; color: transparent;">Gagana K</span></h1>
+      <p class="subtitle">Data Analyst and AI/ML engineering student skilled in SQL, Python, Power BI, and building clean, interactive dashboards & APIs.</p>
+      <div class="quick">
+        <a href="mailto:gaganashetty274@gmail.com">gaganashetty274@gmail.com</a>
+        <a href="tel:+919980182935">+91 99801 82935</a>
+        <a href="https://linkedin.com/in/gagana-kodandaraama-b68633240" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Gagana-2003" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="hero-cta">
+        <a class="cta" href="#projects">See Projects</a>
+        <a class="cta" href="#contact" style="background:linear-gradient(120deg,var(--accent-2),var(--accent));">Hire Me</a>
+      </div>
+    </div>
+    <div class="avatar sr" aria-label="Cover image"></div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container sr">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-sub">Tools & technologies I work with</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Programming</h3>
+          <div class="chips">
+            <span class="chip">SQL (Advanced)</span>
+            <span class="chip">Python</span>
+            <span class="chip">MongoDB</span>
+            <span class="chip">Java</span>
+          </div>
+          <div style="height:10px"></div>
+          <div class="meter" data-val="92"><span></span></div>
+        </div>
+        <div class="card">
+          <h3>Tools & Tech</h3>
+          <div class="chips">
+            <span class="chip">Power BI</span>
+            <span class="chip">Excel</span>
+            <span class="chip">Postman (REST)</span>
+            <span class="chip">Git</span>
+            <span class="chip">Tableau</span>
+          </div>
+          <div style="height:10px"></div>
+          <div class="meter" data-val="88"><span></span></div>
+        </div>
+        <div class="card">
+          <h3>Data & Backend</h3>
+          <div class="chips">
+            <span class="chip">Data Cleaning</span>
+            <span class="chip">Visualization</span>
+            <span class="chip">Modeling</span>
+            <span class="chip">DBMS</span>
+            <span class="chip">Relational Design</span>
+            <span class="chip">API Integration</span>
+          </div>
+          <div style="height:10px"></div>
+          <div class="meter" data-val="86"><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
+    <div class="container sr">
+      <h2 class="section-title">Education</h2>
+      <div class="timeline">
+        <div class="t-item card">
+          <div class="t-dot"></div>
+          <div>
+            <h3>B.E. in AI & ML — CGPA 9.52</h3>
+            <p class="section-sub">BGS Institute of Technology, B.G. Nagara, Karnataka <span style="opacity:.6">• Aug 2021 – May 2025</span></p>
+          </div>
+        </div>
+        <div class="t-item card">
+          <div class="t-dot"></div>
+          <div>
+            <h3>Pre-University — 84.3%</h3>
+            <p class="section-sub">Siddaganga PU College, Tumkur, Karnataka <span style="opacity:.6">• May 2019 – Jul 2021</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container sr">
+      <h2 class="section-title">Projects</h2>
+      <div class="grid">
+        <div class="card project">
+          <h3>Women Empowerment through E‑Commerce with AI</h3>
+          <p>Built a real‑time face recognition system with OpenCV that detects female faces in ~2s; packaged a GUI for dataset collection and model training (~95% accuracy). Integrated Python + SQL + APIs and MongoDB for seller access controls.</p>
+          <div class="links">
+            <a class="btn" href="https://github.com/Gagana-2003" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">ML</span><span class="chip">MongoDB</span><span class="chip">SQL</span>
+          </div>
+        </div>
+        <div class="card project">
+          <h3>Hyper Mart Sales Dashboard (Advanced Excel)</h3>
+          <p>Cleaned & transformed 9k+ sales rows; designed interactive dashboards with Pivot Tables/Charts & Slicers. Visuals include monthly trend lines, region/state pies, and category/state profit bars to enable faster decisions.</p>
+          <div class="links">
+            <a class="btn" href="https://github.com/Gagana-2003" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+          <div class="chips">
+            <span class="chip">Excel</span><span class="chip">Power BI</span><span class="chip">DAX</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container sr">
+      <h2 class="section-title">Experience</h2>
+      <div class="card">
+        <h3>Palle Technology — Data Visualization & Analysis</h3>
+        <p class="section-sub">Bengaluru • Sep 2024 – Feb 2025</p>
+        <ul>
+          <li>Performed cleaning & preprocessing in Excel to ensure accuracy and consistency.</li>
+          <li>Used Pivot Tables/Charts and Slicers for dynamic insights and filtering.</li>
+          <li>Built an interactive dashboard for sales trends (line), region performance (pie), and top states.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section id="achievements">
+    <div class="container sr">
+      <h2 class="section-title">Achievements</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Academic</h3>
+          <ul>
+            <li>Class topper in 3rd & 5th semesters (CGPA 9.52).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Community & Events</h3>
+          <ul>
+            <li>Pitching at W@W Empower session (KDEM).</li>
+            <li>Hands‑on Embedded Systems workshop (BGSIT).</li>
+            <li>Inter‑college project exhibition (BGSIT).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Certifications</h3>
+          <ul>
+            <li>SQL — Udemy</li>
+            <li>Python — Udemy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container sr">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">Karnataka • Open to roles in Data Analytics / AI/ML • Let's talk!</p>
+      <div class="grid">
+        <div class="card">
+          <form id="contactForm">
+            <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px;">
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+              <input type="email" id="email" name="email" placeholder="Your email" required />
+            </div>
+            <textarea id="message" name="message" placeholder="Your message" required></textarea>
+            <button type="submit" class="btn-primary">Send</button>
+            <p id="status" style="color:var(--muted); margin:8px 0 0;"></p>
+            <p style="color:var(--muted); font-size:13px;"></p>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Direct</h3>
+          <p><strong>Email:</strong> <a href="mailto:gaganashetty274@gmail.com">gaganashetty274@gmail.com</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+919980182935">+91-9980182935</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/gagana-kodandaraama-b68633240" target="_blank" rel="noopener">/in/gagana-kodandaraama-b68633240</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/Gagana-2003" target="_blank" rel="noopener">@Gagana-2003</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap;">
+      <div>© <span id="year"></span> Gagana K</div>
+      <div class="links">
+        <a href="#home">Top</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ---------- JS: Particles, Scroll Reveal, Meters, Contact ---------- -->
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple particles
+    (function(){
+      const c = document.getElementById('particles');
+      const ctx = c.getContext('2d');
+      let w, h, dpr = window.devicePixelRatio || 1;
+      let P = [];
+      function resize(){
+        w = c.width = innerWidth * dpr;
+        h = c.height = innerHeight * dpr;
+        c.style.width = innerWidth + 'px';
+        c.style.height = innerHeight + 'px';
+      }
+      function makeParticle(){
+        return { x: Math.random()*w, y: Math.random()*h, r: Math.random()*2*dpr+0.5, vx:(Math.random()-.5)*.2, vy:(Math.random()-.5)*.2 };
+      }
+      function init(){ P = new Array(120).fill(0).map(makeParticle); }
+      function step(){
+        ctx.clearRect(0,0,w,h);
+        ctx.globalAlpha = 0.8;
+        for(const p of P){
+          p.x += p.vx; p.y += p.vy;
+          if(p.x<0||p.x>w) p.vx*=-1;
+          if(p.y<0||p.y>h) p.vy*=-1;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+        }
+        requestAnimationFrame(step);
+      }
+      addEventListener('resize', resize);
+      resize(); init(); step();
+    })();
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.sr');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    }, { threshold: .1 });
+    revealEls.forEach(el => io.observe(el));
+
+    // Animate skill meters
+    document.querySelectorAll('.meter').forEach(m => {
+      const v = +m.getAttribute('data-val') || 70;
+      const bar = m.querySelector('span');
+      setTimeout(() => { bar.style.width = v + '%'; bar.style.transition = 'width 1.2s ease'; }, 300);
+    });
+
+    // Contact form: EmailJS (optional) + mailto fallback
+    // 1) Create a free account at https://www.emailjs.com/
+    // 2) Add your Service ID, Template ID, and Public Key below.
+    const EMAILJS = {
+      SERVICE_ID: "",   // e.g., "service_xxxxx"
+      TEMPLATE_ID: "",  // e.g., "template_xxxxx"
+      PUBLIC_KEY: ""    // e.g., "AbCdEf12345"
+    };
+
+    function emailjsAvailable(){
+      return EMAILJS.SERVICE_ID && EMAILJS.TEMPLATE_ID && EMAILJS.PUBLIC_KEY;
+    }
+
+    async function sendViaEmailJS(name, email, message){
+      // Load EmailJS SDK on the fly
+      await new Promise((resolve, reject) => {
+        if(document.getElementById('emailjs-sdk')) return resolve();
+        const s = document.createElement('script');
+        s.id = 'emailjs-sdk';
+        s.src = 'https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js';
+        s.onload = resolve; s.onerror = reject;
+        document.head.appendChild(s);
+      });
+      // init and send
+      /* global emailjs */
+      emailjs.init(EMAILJS.PUBLIC_KEY);
+      return emailjs.send(EMAILJS.SERVICE_ID, EMAILJS.TEMPLATE_ID, {
+        from_name: name,
+        reply_to: email,
+        message: message
+      });
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const status = document.getElementById('status');
+
+      // Try EmailJS first
+      if(emailjsAvailable()){
+        status.textContent = "Sending...";
+        try{
+          await sendViaEmailJS(name, email, message);
+          status.textContent = "Message sent! I'll get back to you soon.";
+          e.target.reset();
+        }catch(err){
+          console.error(err);
+          status.textContent = "";
+          // Fallback
+          setTimeout(() => {
+            const subject = encodeURIComponent("Portfolio Contact from " + name);
+            const body = encodeURIComponent(message + "\n\nReply to: " + email);
+            window.location.href = "mailto:gaganashetty274@gmail.com?subject=" + subject + "&body=" + body;
+          }, 800);
+        }
+      }else{
+        // Direct fallback to mailto
+        const subject = encodeURIComponent("Portfolio Contact from " + name);
+        const body = encodeURIComponent(message + "\n\nReply to: " + email);
+        window.location.href = "mailto:gaganashetty274@gmail.com?subject=" + subject + "&body=" + body;
+      }
+    });
+  </script>
+</body>
+</html>
